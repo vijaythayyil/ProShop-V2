@@ -13,7 +13,6 @@ const Product = ({ product }) => {
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div" className="product-title">
             {" "}
-            // added className="product-title" since it has ellipsis "...."
             <strong>{product.name}</strong>
           </Card.Title>
         </Link>
