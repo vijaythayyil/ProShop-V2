@@ -11,11 +11,13 @@
 
 import dotenv from "dotenv"; //import dotenv
 dotenv.config(); //initialize dotenv
+import connectDB from "./config/db.js";
 import express from "express"; //import express
 import products from "./data/products.js"; //since we are using ES modules, we need to add the .js extension
 
 const port = process.env.PORT || 5000; //initialize port
 
+connectDB(); //connect to the database
 const app = express(); //initialize express
 
 app.get("/api/products", (req, res) => {
