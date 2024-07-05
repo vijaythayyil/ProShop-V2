@@ -12,22 +12,15 @@
 import dotenv from "dotenv"; //import dotenv
 dotenv.config(); //initialize dotenv
 import connectDB from "./config/db.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import express from "express"; //import express
-import products from "./data/products.js"; //since we are using ES modules, we need to add the .js extension
+//import products from "./data/products.js"; //since we are using ES modules, we need to add the .js extension
+import productRoutes from "./routes/productRoutes.js"; //import productRoutes
 
 const port = process.env.PORT || 5000; //initialize port
 
 connectDB(); //connect to the database
 const app = express(); //initialize express
-
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === req.params.id);
-  res.json(product);
-});
 
 //what is npm i -D
 //npm i -D is short for npm install --save-dev. It installs a package locally for development purposes.
@@ -38,5 +31,9 @@ app.get("/", (req, res) => {
   //get request
   res.send("API is running...");
 });
+
+app.use("/api/products", productRoutes); //use productRoutes
+app.use(notFound); //use notFound
+app.use(errorHandler); //use errorHandler
 
 app.listen(port, () => console.log(`Server running on port ${port}`)); //listen to port
