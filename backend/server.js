@@ -14,17 +14,13 @@ dotenv.config(); //initialize dotenv
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import express from "express"; //import express
-//import products from "./data/products.js"; //since we are using ES modules, we need to add the .js extension
 import productRoutes from "./routes/productRoutes.js"; //import productRoutes
+//import products from "./data/products.js"; //since we are using ES modules, we need to add the .js extension
 
 const port = process.env.PORT || 5000; //initialize port
 
 connectDB(); //connect to the database
 const app = express(); //initialize express
-
-//what is npm i -D
-//npm i -D is short for npm install --save-dev. It installs a package locally for development purposes.
-//The package won't be included in the production build.
 
 //creating first route
 app.get("/", (req, res) => {
